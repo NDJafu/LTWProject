@@ -1,6 +1,7 @@
 import HomePage from "./pages/HomePage";
 import SearchResult from "./pages/SearchResult";
 import ProductDetail from "./pages/ProductDetail";
+import Admin from "./pages/Admin";
 import { BrowserRouter as Router, Routes,Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";  
 
@@ -12,7 +13,8 @@ function App() {
             <Route index element={<HomePage/>} />
             <Route path="search" element={<SearchResult/>}/>
             <Route path="detail" element={<ProductDetail/>}/>
-        </Route>
+        </Route> 
+        <Route path="admin" element={<Admin/>}/>
        </Routes>
      </Router>
      

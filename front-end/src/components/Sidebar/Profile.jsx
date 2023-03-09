@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import { FaUser } from 'react-icons/fa'
 import ButtonStretch from '../Buttons/ButtonStretch'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [isLogged, setIsLogged] = useState(false)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -11,6 +14,14 @@ const Profile = () => {
   const [emailForm, setEmailForm] = useState(false);
   const [passwordForm, setPasswordForm] = useState(false);
   const [registerForm, setRegisterForm] = useState(false);
+
+  useEffect(()=>{
+    const user = localStorage.getItem('Email')
+    if(user === null || user === "" || user === undefined){
+    }  else {
+      setIsLogged(true)
+    }
+  },[])
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
@@ -40,13 +51,16 @@ const Profile = () => {
   }
   const handleLogin = (event) => {
     event.preventDefault();
-    axios.post('/api/registerAccount', { email : email, password: password})
+    axios.post('/api/login', { email : email, password: password})
       .then((response) => {
-        if(response){
+        if(response.data === null){
+          alert("Nhập sai mật khẩu!")
+        } else if (response.data.isAdmin) {
+          navigate("/admin")
+        }
+        else {
+          window.location.reload(false)
           localStorage.setItem('Email',email)
-          localStorage.setItem('Password',password)
-        } else {
-          alert("Sai mật khẩu!")
         }
       })
   }
@@ -60,6 +74,8 @@ const Profile = () => {
     }
     setPasswordForm(false)
     setRegisterForm(false)
+    setEmail("")
+    setPassword("")
   }
   const handleEmailChange = (e) =>{
     setEmail(e.target.value)
@@ -70,8 +86,8 @@ const Profile = () => {
 
   return (
     <>
-      <div className='md:flex hidden items-center' onClick={handleProfileClick}>
-      <FaUser/>
+      <div className='md:flex hidden items-center' onClick={isLogged? "" : handleProfileClick }>
+      <FaUser/> {isLogged? `Hello ${localStorage.getItem('Email')}`:""}
       </div>
       <div className={`w-screen h-full fixed top-0 left-0 bg-black/50 z-50 ${dim? "":"hidden"}`} onClick={handleProfileClick}>  
       </div>
@@ -83,7 +99,7 @@ const Profile = () => {
             <h3 className='font-bold'>LOGIN OR SIGN UP {"(IT'S FREE)"}</h3>
             <p className='text-sm py-2'>Enter your email to access or create your account</p>
             <form onSubmit={handleEmailSubmit}>
-              <input type="text" placeholder='Email*' value={email} className='p-3 my-2 bg-gray-100 w-full' onChange={handleEmailChange}></input>
+              <input type="text" placeholder='Email*' value={email} className='p-3 my-2 bg-gray-100 w-full' onChange={handleEmailChange} required></input>
               <button type='submit' className='w-full invert'>
                 <ButtonStretch text="CONTINUE"/>
               </button>
@@ -98,7 +114,7 @@ const Profile = () => {
             <p className='text-sm py-4'>Looks like you are new here. Create a password to set up your adiClub account.</p>
             <h3 className='font-bold text-md'>CREATE PASSWORD</h3>
             <form onSubmit={handleRegister}>
-              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange}></input>
+              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
               <button type='submit' className='w-full invert'>
                 <ButtonStretch text="REGISTER"/>
               </button>
@@ -112,7 +128,7 @@ const Profile = () => {
             <h1 className='text-2xl font-bold'>LOG IN</h1>
             <p className='text-sm py-4'>Welcome back! Fill in your password to log in</p>
             <form onSubmit={handleLogin}>
-              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange}></input>
+              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
               <button type='submit' className='w-full invert'>
                 <ButtonStretch text="LOG IN"/>
               </button>

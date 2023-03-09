@@ -34,12 +34,8 @@ const registerUser = async (req, res) => {
 };
 const loginUser = (req, res) => {
   const { email, password } = req.body;
-  User.exists({ email: email, password: password }, (err, doc) => {
-    if (err) {
-      console.log(err);
-    } else {
-      res.status(200).send(doc);
-    }
+  User.findOne({ email: email, password: password }).then((result) => {
+    res.status(201).json(result);
   });
 };
 
