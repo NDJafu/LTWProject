@@ -16,7 +16,7 @@ const HomeItems = () => {
   // }, [])
   // *after promise
   useEffect(() => {
-      axios.get('/api').then(data=>{setProducts(data)})
+    axios.get('/product').then(result =>{setProducts(result.data.products)})
   }, [])
   function getImageURL(id){
     return("src/assets/img/"+id+".webp")
@@ -29,14 +29,14 @@ const HomeItems = () => {
       </h1>
       <div className='grid md:grid-cols-2 lg:grid-cols-4 py-8'>
           {
-            products && products?.data.map((product) => (
+            products && products?.map((product) => (
               <div key={product._id} className="w-full hover:border-black box-border border-transparent border bg-white shrink duration-300 ease-in-out">
               <Link to={`/detail?id=`+product._id}>
                 <img src={getImageURL(product._id)} alt="product image" />
               </Link>
               <div className="px-5 py-5">
                   <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-800">{product.productName}</h5>
+                      <h5 className="text-xl font-semibold tracking-tight text-gray-800">{product.name}</h5>
                   </a>
                   <div className="flex items-center justify-between">
                       <span className="text-3xl font-bold text-gray-900">${product.price}</span>
