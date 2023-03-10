@@ -4,9 +4,14 @@ const connectDB = require("./db/connet.db")
 require("dotenv").config()
 const route = require("./route/common.route")
 
+app.use(express.json())
+
+app.use(express.urlencoded({
+    extended: true
+}))
+
 route(app)
 
-app.use(express.json())
 
 
 
