@@ -3,6 +3,8 @@ import { FaUser } from 'react-icons/fa'
 import ButtonStretch from '../Buttons/ButtonStretch'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import LoginFormLayout from '../Layout/LoginFormLayout'
+import TempLogOut from './TempLogOut'
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -87,55 +89,43 @@ const Profile = () => {
   return (
     <>
       <div className='md:flex hidden items-center' onClick={isLogged? "" : handleProfileClick }>
-      <FaUser/> {isLogged? `Hello ${localStorage.getItem('Email')}`:""}
+      <FaUser/> {isLogged? <TempLogOut/> :""}
       </div>
       <div className={`w-screen h-full fixed top-0 left-0 bg-black/50 z-50 ${dim? "":"hidden"}`} onClick={handleProfileClick}>  
       </div>
-      <div className={`w-full fixed z-50 left-0 top-1/2 flex justify-center items-center ${emailForm? "":"hidden"}`}>
-        <div className='w-1/5 bg-white absolute border-box border border-black'>
-          <div className='px-4 pt-10 pb-20'>
-            <h1 className='text-2xl font-bold'>YOUR ADICLUB BENEFITS AWAIT!</h1>
-            <p className='text-sm py-4'>Get free shipping, discount vouchers and members only products when you’re in adiClub</p>
-            <h3 className='font-bold'>LOGIN OR SIGN UP {"(IT'S FREE)"}</h3>
-            <p className='text-sm py-2'>Enter your email to access or create your account</p>
-            <form onSubmit={handleEmailSubmit}>
-              <input type="text" placeholder='Email*' value={email} className='p-3 my-2 bg-gray-100 w-full' onChange={handleEmailChange} required></input>
-              <button type='submit' className='w-full invert'>
-                <ButtonStretch text="CONTINUE"/>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className={`w-full fixed z-50 left-0 top-1/2 flex justify-center items-center ${registerForm? "":"hidden"}`}>
-        <div className='w-1/5 bg-white absolute border-box border border-black'>
-          <div className='px-4 pt-10 pb-20'>
-            <h1 className='text-2xl font-bold'>SIGN UP FOR FREE</h1>
-            <p className='text-sm py-4'>Looks like you are new here. Create a password to set up your adiClub account.</p>
-            <h3 className='font-bold text-md'>CREATE PASSWORD</h3>
-            <form onSubmit={handleRegister}>
-              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
-              <button type='submit' className='w-full invert'>
-                <ButtonStretch text="REGISTER"/>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div className={`w-full fixed z-50 left-0 top-1/2 flex justify-center items-center ${passwordForm? "":"hidden"}`}>
-        <div className='w-1/5 bg-white absolute border-box border border-black'>
-          <div className='px-4 pt-10 pb-20'>
-            <h1 className='text-2xl font-bold'>LOG IN</h1>
-            <p className='text-sm py-4'>Welcome back! Fill in your password to log in</p>
-            <form onSubmit={handleLogin}>
-              <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
-              <button type='submit' className='w-full invert'>
-                <ButtonStretch text="LOG IN"/>
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+      <LoginFormLayout toggle={emailForm}>
+        <h1 className='text-2xl font-bold'>YOUR ADICLUB BENEFITS AWAIT!</h1>
+        <p className='text-sm py-4'>Get free shipping, discount vouchers and members only products when you’re in adiClub</p>
+        <h3 className='font-bold'>LOGIN OR SIGN UP {"(IT'S FREE)"}</h3>
+        <p className='text-sm py-2'>Enter your email to access or create your account</p>
+        <form onSubmit={handleEmailSubmit}>
+          <input type="text" placeholder='Email*' value={email} className='p-3 my-2 bg-gray-100 w-full' onChange={handleEmailChange} required></input>
+          <button type='submit' className='w-full invert'>
+            <ButtonStretch text="CONTINUE"/>
+          </button>
+        </form>
+      </LoginFormLayout>
+      <LoginFormLayout toggle={registerForm}>
+        <h1 className='text-2xl font-bold'>SIGN UP FOR FREE</h1>
+        <p className='text-sm py-4'>Looks like you are new here. Create a password to set up your adiClub account.</p>
+        <h3 className='font-bold text-md'>CREATE PASSWORD</h3>
+        <form onSubmit={handleRegister}>
+          <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
+          <button type='submit' className='w-full invert'>
+            <ButtonStretch text="REGISTER"/>
+          </button>
+        </form>
+      </LoginFormLayout>
+      <LoginFormLayout toggle={passwordForm}>
+        <h1 className='text-2xl font-bold'>LOG IN</h1>
+        <p className='text-sm py-4'>Welcome back! Fill in your password to log in</p>
+        <form onSubmit={handleLogin}>
+          <input type="text" placeholder='Password*' value={password} className='p-3 my-2 bg-gray-100 w-full' onChange={handlePasswordChange} required></input>
+          <button type='submit' className='w-full invert'>
+            <ButtonStretch text="LOG IN"/>
+          </button>
+        </form>
+      </LoginFormLayout>
     </>
     
   )
