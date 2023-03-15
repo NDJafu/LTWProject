@@ -13,6 +13,7 @@ const {
   searchProducts,
   getProductDetail,
   getAllProducts,
+  getCartProducts,
 } = require("../controller/product");
 
 router.get("/", getAllProducts);
@@ -20,6 +21,8 @@ router.get("/", getAllProducts);
 router.get("/search", searchProducts);
 
 router.get("/detail/:id", getProductDetail);
+
+router.get("/getCart/:name", getCartProducts);
 
 router.get("/checkEmail", ifUserExist);
 

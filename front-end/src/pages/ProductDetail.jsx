@@ -5,6 +5,7 @@ import axios from 'axios';
 import ReviewAccordion from '../components/Products/Detail/Accordion/ReviewAccordion';
 import DescriptionAccordion from '../components/Products/Detail/Accordion/DescriptionAccordion';
 import DetailAccordion from '../components/Products/Detail/Accordion/DetailAccordion';
+import AddToCart from '../components/Buttons/AddToCart';
 
 const ProductDetail = () => {
   const [detail, setDetail] = useState("")
@@ -17,6 +18,7 @@ const ProductDetail = () => {
   useEffect(() => {
     axios.get('/api/detail/'+id).then(d=>{setDetail(d.data)
     console.log(d.data.productName)})
+    window.scrollTo(0,0);
   },[])
 
   
@@ -72,9 +74,9 @@ const ProductDetail = () => {
               })
             }
           </div>
-          <div className='invert'>
+          <AddToCart item={detail.productName}>
             <ButtonStretch text={"ADD TO BAG"}/>
-          </div>
+          </AddToCart>
 
           </div>
         </div>

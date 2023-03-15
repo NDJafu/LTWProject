@@ -28,5 +28,20 @@ const getProductDetail = async (req, res) => {
     res.status(500).json({ msg: error });
   }
 };
+const getCartProducts = (req, res) => {
+  try {
+    const { name } = req.params;
+    Product.find({ productName: name.split(",") }).then((data) => {
+      res.status(200).json(data);
+    });
+  } catch (error) {
+    res.status(500).json({ msg: error });
+  }
+};
 
-module.exports = { searchProducts, getProductDetail, getAllProducts };
+module.exports = {
+  searchProducts,
+  getProductDetail,
+  getAllProducts,
+  getCartProducts,
+};

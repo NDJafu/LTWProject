@@ -88,7 +88,7 @@ const Profile = () => {
 
   return (
     <>
-      <div className='md:flex hidden items-center' onClick={isLogged? "" : handleProfileClick }>
+      <div className='md:flex hidden items-center hover:cursor-pointer' onClick={isLogged? "" : handleProfileClick }>
       <FaUser/> {isLogged? <TempLogOut/> :""}
       </div>
       <div className={`w-screen h-full fixed top-0 left-0 bg-black/50 z-50 ${dim? "":"hidden"}`} onClick={handleProfileClick}>  

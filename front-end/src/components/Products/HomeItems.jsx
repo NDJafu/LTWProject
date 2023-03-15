@@ -21,7 +21,7 @@ const HomeItems = () => {
   function getImageURL(id){
     return("src/assets/img/"+id+".webp")
   }
-  const what = console.log(products.data)
+
   return (
     <div className='px-60 py-8'>
       <h1 className='uppercase text-3xl'>
@@ -30,20 +30,18 @@ const HomeItems = () => {
       <div className='grid md:grid-cols-2 lg:grid-cols-4 py-8'>
           {
             products && products?.data.map((product) => (
-              <div key={product._id} className="w-full hover:border-black box-border border-transparent border bg-white shrink duration-300 ease-in-out">
-              <Link to={`/detail?id=`+product._id}>
+              <Link to={`/detail?id=`+product._id} className="w-full hover:border-black box-border border-transparent border bg-white shrink duration-300 ease-in-out">
                 <img src={getImageURL(product._id)} alt="product image" />
+                <div className="px-5 py-5">
+                    <a href="#">
+                        <h5 className="text-xl font-semibold tracking-tight text-gray-800">{product.productName}</h5>
+                    </a>
+                    <div className="flex items-center justify-between">
+                        <span className="text-3xl font-bold text-gray-900">${product.price}</span>
+                    </div>
+                </div>
               </Link>
-              <div className="px-5 py-5">
-                  <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-800">{product.productName}</h5>
-                  </a>
-                  <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-gray-900">${product.price}</span>
-                      <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-                  </div>
-              </div>
-              </div>
+              
             ))
           }
       </div>
