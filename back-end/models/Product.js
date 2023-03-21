@@ -10,6 +10,10 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  sizes: {
+    type: Array,
+    required: true,
+  },
 });
 
 module.exports = mongoose.model("Product", productSchema);
