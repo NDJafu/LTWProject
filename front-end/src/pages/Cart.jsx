@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useCartContext } from "../context/CartContext";
 import CartItem from "../components/Cart/CartItem";
 import ButtonStretch from "../components/Buttons/ButtonStretch";

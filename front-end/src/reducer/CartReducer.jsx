@@ -41,6 +41,23 @@ const CartReducer = (state, action) => {
       };
     }
   }
+  if (action.type === "SET_AMOUNT") {
+    let { amount, id } = action.payload;
+
+    let updatedProduct = state.cart.map((curElem) => {
+      if (curElem.id == id) {
+        let newAmount = amount;
+
+        return {
+          ...curElem,
+          amount: newAmount,
+        };
+      } else {
+        return curElem;
+      }
+    });
+    return { ...state, cart: updatedProduct };
+  }
 
   if (action.type === "SET_DECREMENT") {
     let updatedProduct = state.cart.map((curElem) => {

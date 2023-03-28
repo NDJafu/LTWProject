@@ -26,6 +26,10 @@ const CartProvider = ({ children }) => {
     dispatch({ type: "ADD_TO_CART", payload: { id, size, amount, product } });
   };
 
+  const setAmount = (id, amount) => {
+    dispatch({ type: "SET_AMOUNT", payload: { id, amount } });
+  };
+
   const setIncrease = (id) => {
     dispatch({ type: "SET_INCREMENT", payload: id });
   };
@@ -50,6 +54,7 @@ const CartProvider = ({ children }) => {
         ...state,
         addToCart,
         removeItem,
+        setAmount,
         setIncrease,
         setDecrease,
       }}
@@ -58,7 +63,7 @@ const CartProvider = ({ children }) => {
     </CartContext.Provider>
   );
 };
-
+// export a function that call the useContext hooks instead of importing useContext and useContext(CartContext) all the time.
 const useCartContext = () => {
   return useContext(CartContext);
 };

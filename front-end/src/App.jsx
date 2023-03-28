@@ -6,6 +6,10 @@ import Cart from "./pages/Cart";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import AdminLayout from "./components/Admin/AdminLayout";
+import ProfileDetail from "./pages/ProfileDetail";
+import Account from "./pages/Account";
+import PersonalInfo from "./components/Profile/PersonalInfo";
+import AddressBook from "./components/Profile/AddressBook";
 
 function App() {
   return (
@@ -16,6 +20,13 @@ function App() {
           <Route path="search" element={<SearchResult />} />
           <Route path="detail" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="my-account" element={<ProfileDetail />}>
+            <Route index />
+            <Route path="" element={<Account />}>
+              <Route path="profile" element={<PersonalInfo />} />
+              <Route path="address-book" element={<AddressBook />} />
+            </Route>
+          </Route>
         </Route>
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
