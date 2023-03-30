@@ -9,16 +9,9 @@ const createProduct = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ product });
 };
 const getAllProducts = async (req, res) => {
-  const { name } = req.query;
-  const queryObject = {};
+  const products = await Product.find({});
 
-  if (name) {
-    queryObject.name = { $regex: name, $options: "i" };
-  }
-
-  const products = await Product.find(queryObject);
-
-  res.status(StatusCodes.OK).json({ products });
+  res.status(StatusCodes.OK).json(products);
 };
 const getSingleProduct = async (req, res) => {
   const { id: productId } = req.params;
@@ -47,13 +40,9 @@ const updateProduct = async (req, res) => {
 };
 const deleteProduct = async (req, res) => {
   const { id: productId } = req.params;
-<<<<<<< HEAD
 
   const product = await Product.findOne({ _id: productId });
 
-=======
-  const product = await Product.findOne({ _id: productId });
->>>>>>> huy.back_end
   if (!product) {
     throw new CustomError.NotFoundError(`No product with id : ${productId}`);
   }
