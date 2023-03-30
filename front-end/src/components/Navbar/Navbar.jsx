@@ -6,6 +6,7 @@ import SearchBar from "../Inputs/SearchBar";
 import NavLinks from "./NavLinks";
 import MobileSearch from "../Buttons/MobileSearch";
 import Profile from "../Sidebar/Profile";
+import Cart from "../Sidebar/Cart";
 
 const Navbar = () => {
 const [open, setOpen] = useState(false)
@@ -30,6 +31,7 @@ const [open, setOpen] = useState(false)
           <div className="flex gap-4">
             <SearchBar />
             <Profile/>
+            <Cart/>
           </div>
           {/*Mobile */}
           <ul className={`md:hidden bg-white uppercase fixed w-full h-full bottom-0 py-24 pl-8 duration-500 ${open? "left-0":"left-[-100%]"}`}>
