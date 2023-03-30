@@ -21,7 +21,7 @@ const ProductSchema = new mongoose.Schema(
     category: {
       type: String,
       required: [true, 'Please provide product category'],
-      enum: ['office', 'kitchen', 'bedroom'],
+      enum: ['Men', 'Women', 'Kid'],
     },
     user: {
       type: mongoose.Types.ObjectId,

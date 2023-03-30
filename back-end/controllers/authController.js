@@ -16,10 +16,10 @@ const ifAccountExist = async(req, res) =>{
 const register = async (req, res) => {
   const { email, name, password } = req.body;
 
-  // const emailAlreadyExists = await User.findOne({ email });
-  // if (emailAlreadyExists) {
-  //   throw new CustomError.BadRequestError('Email already exists');
-  // }
+  const emailAlreadyExists = await User.findOne({ email });
+  if (emailAlreadyExists) {
+    throw new CustomError.BadRequestError('Email already exists');
+  }
 
   // first registered user is an admin
   const isFirstAccount = (await User.countDocuments({})) === 0;
@@ -36,11 +36,11 @@ const login = async (req, res) => {
   if (!email || !password) {
     throw new CustomError.BadRequestError('Please provide email and password');
   }
-  // const user = await User.findOne({ email });
+  const user = await User.findOne({ email });
 
-  // if (!user) {
-  //   throw new CustomError.UnauthenticatedError('Invalid Credentials');
-  // }
+  if (!user) {
+    throw new CustomError.UnauthenticatedError('Invalid Credentials');
+  }
   const isPasswordCorrect = await user.comparePassword(password);
   if (!isPasswordCorrect) {
     throw new CustomError.UnauthenticatedError('Invalid Credentials');
