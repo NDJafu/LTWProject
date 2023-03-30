@@ -16,12 +16,15 @@ const ProductDetail = () => {
   const id = searchParams.get("id");
 
   useEffect(() => {
-    axios.get("/api/detail/" + id).then((d) => {
-      setDetail(d.data);
-    });
+    async function fetchData() {
+      const { data } = await axios.get("/api/v1/products/" + id);
+      setDetail(data.product);
+    }
+    fetchData();
     window.scrollTo(0, 0);
   }, []);
 
+  console.log(detail);
   // const handleSelect = (value) => {
   //   setSelected(selected === value ? 0 : value);
   // };

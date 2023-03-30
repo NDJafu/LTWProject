@@ -18,7 +18,7 @@ const Profile = () => {
   const [registerForm, setRegisterForm] = useState(false);
 
   useEffect(() => {
-    const user = localStorage.getItem("Email");
+    const user = localStorage.getItem("currentUser");
     if (user === null || user === "" || user === undefined) {
     } else {
       setIsLogged(true);
@@ -28,41 +28,38 @@ const Profile = () => {
   const handleEmailSubmit = (e) => {
     e.preventDefault();
     axios
-      .get("/api/checkEmail?email=" + email)
-      .then((response) => {
-        if (response.data.exists) {
-          setEmailForm(false);
-          setPasswordForm(true);
-        } else {
+      .post("/api/v1/auth/ifaccountexist", { email: email })
+      .then(({ data }) => {
+        if (!data.exists) {
           setEmailForm(false);
           setRegisterForm(true);
         }
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(() => {
+        setEmailForm(false);
+        setPasswordForm(true);
       });
   };
-  const handleRegister = (event) => {
-    event.preventDefault();
+  const handleRegister = (e) => {
+    e.preventDefault();
     axios
-      .post("/api/registerAccount", { email: email, password: password })
-      .then((response) => {
-        console.log(response.data);
+      .post("/api/v1/auth/register", { email: email, password: password })
+      .then(({ data }) => {
+        window.location.reload(false);
+        localStorage.setItem("currentUser", JSON.stringify(data.user));
       });
     window.location.reload(false);
   };
-  const handleLogin = (event) => {
-    event.preventDefault();
+  const handleLogin = (e) => {
+    e.preventDefault();
     axios
-      .post("/api/login", { email: email, password: password })
-      .then((response) => {
-        if (response.data === null) {
+      .post("/api/v1/auth/login", { email: email, password: password })
+      .then(({ data }) => {
+        if (data.user === null) {
           alert("Nhập sai mật khẩu!");
-        } else if (response.data.isAdmin) {
-          navigate("/admin");
         } else {
           window.location.reload(false);
-          localStorage.setItem("Email", email);
+          localStorage.setItem("currentUser", JSON.stringify(data.user));
         }
       });
   };

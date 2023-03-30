@@ -1,7 +1,7 @@
-const Product = require('../models/Product');
-const { StatusCodes } = require('http-status-codes');
-const CustomError = require('../errors');
-const path = require('path');
+const Product = require("../models/Product");
+const { StatusCodes } = require("http-status-codes");
+const CustomError = require("../errors");
+const path = require("path");
 
 const createProduct = async (req, res) => {
   req.body.user = req.user.userId;
@@ -11,12 +11,12 @@ const createProduct = async (req, res) => {
 const getAllProducts = async (req, res) => {
   const products = await Product.find({});
 
-  res.status(StatusCodes.OK).json({ products, count: products.length });
+  res.status(StatusCodes.OK).json(products);
 };
 const getSingleProduct = async (req, res) => {
   const { id: productId } = req.params;
 
-  const product = await Product.findOne({ _id: productId })
+  const product = await Product.findOne({ _id: productId });
 
   if (!product) {
     throw new CustomError.NotFoundError(`No product with id : ${productId}`);
@@ -48,7 +48,7 @@ const deleteProduct = async (req, res) => {
   }
 
   await product.remove();
-  res.status(StatusCodes.OK).json({ msg: 'Success! Product removed.' });
+  res.status(StatusCodes.OK).json({ msg: "Success! Product removed." });
 };
 // const uploadImage = async (req, res) => {
 //   if (!req.files) {

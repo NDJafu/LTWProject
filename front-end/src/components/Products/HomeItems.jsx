@@ -5,6 +5,7 @@ import axios from "axios";
 
 const HomeItems = () => {
   const [products, setProducts] = useState("");
+  const [loading, setLoading] = useState(true);
   // *before promise
   // useEffect(() => {
   //   const fetchdata = async () =>{
@@ -15,48 +16,30 @@ const HomeItems = () => {
   // }, [])
   // *after promise
   useEffect(() => {
-<<<<<<< HEAD
-    axios.get('/product').then(result =>{setProducts(result.data.products)})
-  }, [])
-  function getImageURL(id){
-    return("src/assets/img/"+id+".webp")
-=======
-    axios.get("/api").then((data) => {
+    // async function fetchData() {
+    //   const { data } = await axios.get("/api/v1/products");
+    //   setProducts(data);
+    //   setLoading(false);
+    // }
+    // fetchData();
+    axios.get("/api/v1/products").then(({ data }) => {
       setProducts(data);
+      setLoading(false);
     });
   }, []);
   function getImageURL(id) {
     return "src/assets/img/" + id + ".webp";
->>>>>>> origin/main
   }
 
   return (
-<<<<<<< HEAD
-    <div className='px-60 py-8'>
-      <h1 className='uppercase text-3xl'>
-        featured products
-      </h1>
-      <div className='grid md:grid-cols-2 lg:grid-cols-4 py-8'>
-          {
-            products && products?.map((product) => (
-              <div key={product._id} className="w-full hover:border-black box-border border-transparent border bg-white shrink duration-300 ease-in-out">
-              <Link to={`/detail?id=`+product._id}>
-                <img src={getImageURL(product._id)} alt="product image" />
-              </Link>
-              <div className="px-5 py-5">
-                  <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-800">{product.name}</h5>
-                  </a>
-                  <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-gray-900">${product.price}</span>
-                      <a href="#" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</a>
-                  </div>
-=======
     <div className="px-60 py-8">
       <h1 className="uppercase text-3xl">featured products</h1>
       <div className="grid md:grid-cols-2 lg:grid-cols-4 py-8">
-        {products &&
-          products?.data.map((product) => (
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          products &&
+          products.map((product) => (
             <Link
               to={`/detail?id=` + product._id}
               className="w-full hover:border-black box-border border-transparent border bg-white shrink duration-300 ease-in-out"
@@ -73,10 +56,10 @@ const HomeItems = () => {
                     ${product.price}
                   </span>
                 </div>
->>>>>>> origin/main
               </div>
             </Link>
-          ))}
+          ))
+        )}
       </div>
     </div>
   );
