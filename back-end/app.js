@@ -5,7 +5,10 @@ require("express-async-errors");
 const express = require("express");
 const app = express();
 // rest of the packages
+<<<<<<< HEAD
 const morgan = require("morgan");
+=======
+>>>>>>> huy.back_end
 const cookieParser = require("cookie-parser");
 
 const cors = require("cors");
@@ -28,6 +31,11 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 
+<<<<<<< HEAD
+=======
+app.use(express.static("./public"));
+
+>>>>>>> huy.back_end
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/products", productRouter);
