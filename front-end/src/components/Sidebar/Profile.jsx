@@ -48,7 +48,6 @@ const Profile = () => {
         window.location.reload(false);
         localStorage.setItem("currentUser", JSON.stringify(data.user));
       });
-    window.location.reload(false);
   };
   const handleLogin = (e) => {
     e.preventDefault();
@@ -85,11 +84,13 @@ const Profile = () => {
 
   return (
     <>
-      <div
-        className="md:flex hidden items-center hover:cursor-pointer"
-        onClick={isLogged ? () => navigate("/my-account") : handleProfileClick}
-      >
-        <FaUser /> {isLogged ? <TempLogOut /> : ""}
+      <div className="md:flex hidden items-center hover:cursor-pointer">
+        <FaUser
+          onClick={
+            isLogged ? () => navigate("/my-account") : handleProfileClick
+          }
+        />{" "}
+        {isLogged ? <TempLogOut /> : ""}
       </div>
       <div
         className={`w-screen h-full fixed top-0 left-0 bg-black/50 z-50 ${
@@ -109,7 +110,7 @@ const Profile = () => {
         </p>
         <form onSubmit={handleEmailSubmit}>
           <input
-            type="text"
+            type="email"
             placeholder="Email*"
             value={email}
             className="p-3 my-2 bg-gray-100 w-full"
@@ -149,7 +150,7 @@ const Profile = () => {
         </p>
         <form onSubmit={handleLogin}>
           <input
-            type="text"
+            type="password"
             placeholder="Password*"
             value={password}
             className="p-3 my-2 bg-gray-100 w-full"

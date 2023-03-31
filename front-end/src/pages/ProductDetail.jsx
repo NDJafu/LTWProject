@@ -29,19 +29,19 @@ const ProductDetail = () => {
   //   setSelected(selected === value ? 0 : value);
   // };
 
-  const { productName, price } = { ...detail };
+  const { name, price } = { ...detail };
 
   function ImgGallery() {
     return (
       <div className="grid grid-cols-2 justify-items-center bg-[#edeff0] divide-x divide-y divide-white">
         <img
           className="col-span-2 w-1/2"
-          src={`src/assets/details/${productName}/main.webp`}
+          src={`src/assets/details/${name}/main.webp`}
         />
-        <img src={`src/assets/details/${productName}/second.webp`} />
-        <img src={`src/assets/details/${productName}/fourth.webp`} />
-        <img src={`src/assets/details/${productName}/fifth.webp`} />
-        <img src={`src/assets/details/${productName}/third.webp`} />
+        <img src={`src/assets/details/${name}/second.webp`} />
+        <img src={`src/assets/details/${name}/fourth.webp`} />
+        <img src={`src/assets/details/${name}/fifth.webp`} />
+        <img src={`src/assets/details/${name}/third.webp`} />
       </div>
     );
   }
@@ -67,7 +67,7 @@ const ProductDetail = () => {
             <p>rating & rating given</p>
           </div>
           <div className="px-10">
-            <h1 className="text-3xl font-bold">{productName}</h1>
+            <h1 className="text-3xl font-bold">{name}</h1>
             <p className="font-bold text-lg py-2">${price}</p>
             <p className="py-2">Color/Colors/Colour</p>
             <p className="py-8">
@@ -92,7 +92,7 @@ const ProductDetail = () => {
                 );
               })}
             </div>
-            <AddToCart item={productName}>
+            <AddToCart item={name}>
               <ButtonStretch text={"ADD TO BAG"} />
             </AddToCart> */}
           </div>

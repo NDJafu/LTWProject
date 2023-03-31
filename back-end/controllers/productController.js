@@ -9,8 +9,14 @@ const createProduct = async (req, res) => {
   res.status(StatusCodes.CREATED).json({ product });
 };
 const getAllProducts = async (req, res) => {
-  const products = await Product.find({});
+  const { name } = req.query;
+  const queryObject = {};
 
+  if (name) {
+    queryObject.name = { $regex: name, $options: "i" };
+  }
+
+  const products = await Product.find(queryObject);
   res.status(StatusCodes.OK).json(products);
 };
 const getSingleProduct = async (req, res) => {

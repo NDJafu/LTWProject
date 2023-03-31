@@ -48,7 +48,7 @@ const HomeItems = () => {
               <div className="px-5 py-5">
                 <a href="#">
                   <h5 className="text-xl font-semibold tracking-tight text-gray-800">
-                    {product.productName}
+                    {product.name}
                   </h5>
                 </a>
                 <div className="flex items-center justify-between">
