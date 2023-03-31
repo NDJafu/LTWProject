@@ -41,6 +41,9 @@ const CartProvider = ({ children }) => {
   const removeItem = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: id });
   };
+  const clearCart = () => {
+    dispatch({ type: "CLEAR_CART" });
+  };
 
   useEffect(() => {
     dispatch({ type: "CART_TOTAL_ITEM" });
@@ -57,6 +60,7 @@ const CartProvider = ({ children }) => {
         setAmount,
         setIncrease,
         setDecrease,
+        clearCart,
       }}
     >
       {children}

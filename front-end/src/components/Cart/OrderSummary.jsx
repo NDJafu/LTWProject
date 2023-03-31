@@ -14,7 +14,7 @@ const OrderSummary = (props) => {
       </div>
       <div className="flex justify-between font-bold border-y border-slate-400 py-6">
         <p>Total</p>
-        <p>PRICE</p>
+        <p>${props.total}</p>
       </div>
     </div>
   );

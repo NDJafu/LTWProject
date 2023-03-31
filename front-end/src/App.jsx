@@ -10,6 +10,7 @@ import ProfileDetail from "./pages/ProfileDetail";
 import Account from "./pages/Account";
 import PersonalInfo from "./components/Profile/PersonalInfo";
 import AddressBook from "./components/Profile/AddressBook";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="search" element={<SearchResult />} />
           <Route path="detail" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="check-out" element={<CheckOut />} />
           <Route path="my-account" element={<ProfileDetail />}>
             <Route index />
             <Route path="" element={<Account />}>

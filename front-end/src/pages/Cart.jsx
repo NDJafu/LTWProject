@@ -56,7 +56,7 @@ const Cart = () => {
         </div>
       </div>
       <div className="w-1/3 h-screen">
-        <Link className="w-full invert relative">
+        <Link to="/check-out" className="w-full invert relative">
           <ButtonStretch text="CHECK OUT" />
         </Link>
         <OrderSummary amount={total_item} total={total_price} />
