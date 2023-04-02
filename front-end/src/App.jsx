@@ -11,6 +11,7 @@ import Account from "./pages/Account";
 import PersonalInfo from "./components/Profile/PersonalInfo";
 import AddressBook from "./components/Profile/AddressBook";
 import CheckOut from "./pages/CheckOut";
+import Products from "./components/Admin/Products";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route index element={<Admin />} />
           <Route path="posts" />
-          <Route path="products" />
+          <Route path="products" element={<Products />} />
           <Route path="orders" />
         </Route>
       </Routes>

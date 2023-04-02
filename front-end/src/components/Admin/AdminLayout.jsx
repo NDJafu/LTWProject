@@ -6,7 +6,7 @@ const AdminLayout = () => {
   return (
     <div className="flex justify-between">
       <AdminNav />
-      <div className="w-5/6 bg-blue-200 h-[4000px]">
+      <div className="w-5/6">
         <Outlet />
       </div>
     </div>

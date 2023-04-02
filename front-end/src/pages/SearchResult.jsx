@@ -4,7 +4,7 @@ import axios from "axios";
 
 const SearchResult = () => {
   const [products, setProducts] = useState("");
-  const [found, setFound] = useState(true);
+  const found = products.length;
   const [sort, setSort] = useState("0");
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const SearchResult = () => {
   const sortedData = [...products].sort((a, b) => {
     switch (sort) {
       case "0":
-        return a.productName.localeCompare(b.productName);
+        return a.productName?.localeCompare(b.productName);
       case "1":
         return b.price - a.price;
       case "2":
@@ -54,7 +54,7 @@ const SearchResult = () => {
           Search
         </Link>
       </div>
-      {found ? (
+      {found > 0 ? (
         <>
           <div className="flex justify-between items-center py-2 border-y border-gray-200">
             <h1 className="text-3xl font-bold">

@@ -4,26 +4,17 @@ import ButtonStretch from "../Buttons/ButtonStretch";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import LoginFormLayout from "../Layout/LoginFormLayout";
-import TempLogOut from "./TempLogOut";
 
 const Profile = () => {
   const navigate = useNavigate();
 
-  const [isLogged, setIsLogged] = useState(false);
+  const isLogged = localStorage.getItem("currentUser");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [dim, setDim] = useState(false);
   const [emailForm, setEmailForm] = useState(false);
   const [passwordForm, setPasswordForm] = useState(false);
   const [registerForm, setRegisterForm] = useState(false);
-
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (user === null || user === "" || user === undefined) {
-    } else {
-      setIsLogged(true);
-    }
-  }, []);
 
   const handleEmailSubmit = (e) => {
     e.preventDefault();
@@ -89,8 +80,7 @@ const Profile = () => {
           onClick={
             isLogged ? () => navigate("/my-account") : handleProfileClick
           }
-        />{" "}
-        {isLogged ? <TempLogOut /> : ""}
+        />
       </div>
       <div
         className={`w-screen h-full fixed top-0 left-0 bg-black/50 z-50 ${

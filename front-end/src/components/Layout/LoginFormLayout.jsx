@@ -1,14 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function LoginFormLayout(props){
+function LoginFormLayout(props) {
   return (
-      <div className={`w-full fixed z-50 left-0 top-1/2 flex justify-center items-center ${props.toggle? "":"hidden"}`}>
-        <div className='w-1/5 bg-white absolute border-box border border-black'>
-          <div className='px-4 pt-10 pb-20'>
-              {props.children}
-          </div>
-        </div>
-      </div>  )
+    <div
+      className={`w-full fixed z-50 left-0 top-1/2 flex justify-center items-center ${
+        props.toggle ? "" : "hidden"
+      }`}
+    >
+      <div className="w-1/5 bg-white absolute border-box border border-black">
+        <div className="px-4 py-8">{props.children}</div>
+      </div>
+    </div>
+  );
 }
 
-export default LoginFormLayout
+export default LoginFormLayout;
