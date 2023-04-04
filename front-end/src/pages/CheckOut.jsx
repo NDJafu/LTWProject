@@ -10,12 +10,17 @@ const CheckOut = () => {
   const navigate = useNavigate();
 
   function handlePlaceOrder() {
-    axios.post("api/v1/orders", { items: cart }).then(({ data }) => {
-      alert("Order has been placed! Thank you for shopping with us!");
-      console.log(data);
-      clearCart();
-      navigate("/");
-    });
+    axios
+      .post("api/v1/orders", { items: cart })
+      .then(({ data }) => {
+        alert("Order has been placed! Thank you for shopping with us!");
+        console.log(data);
+        clearCart();
+        navigate("/");
+      })
+      .catch(() => {
+        alert("Please log in before placing any order!");
+      });
   }
 
   console.log(cart);

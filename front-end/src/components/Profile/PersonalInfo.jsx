@@ -2,13 +2,18 @@ import React, { useEffect, useState } from "react";
 import { HiArrowLongRight } from "react-icons/hi2";
 import axios from "axios";
 import ChangeEmail from "./Credentials/ChangeEmail";
+import ChangePassword from "./Credentials/ChangePassword";
 
 const PersonalInfo = () => {
   const [info, setInfo] = useState(null);
   const [changeEmail, setChangeEmail] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
   const { userId } = JSON.parse(localStorage.getItem("currentUser"));
 
-  const handleOnClose = () => setChangeEmail(false);
+  const handleOnClose = () => {
+    setChangeEmail(false);
+    setChangePassword(false);
+  };
 
   const loadData = () => {
     axios.get("/api/v1/users/" + userId).then(({ data }) => {
@@ -43,13 +48,19 @@ const PersonalInfo = () => {
         EDIT
       </button>
       <h3 className="text-lg font-bold py-2">PASSWORD</h3>
-      <button className="underline font-bold py-2">EDIT</button>
+      <button
+        className="underline font-bold py-2"
+        onClick={() => setChangePassword(true)}
+      >
+        EDIT
+      </button>
       <h3 className="text-lg font-bold py-2">MANAGE ACCOUNT</h3>
       <button className="p-3 mb-20 border border-black flex items-center w-1/2 justify-between">
         <p className="font-bold">DELETE ACCOUNT</p>
         <HiArrowLongRight />
       </button>
       <ChangeEmail visible={changeEmail} onClose={handleOnClose} />
+      <ChangePassword visible={changePassword} onClose={handleOnClose} />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import PersonalInfo from "./components/Profile/PersonalInfo";
 import AddressBook from "./components/Profile/AddressBook";
 import CheckOut from "./pages/CheckOut";
 import Products from "./components/Admin/Products";
+import Orders from "./components/Admin/Orders";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
           <Route index element={<Admin />} />
           <Route path="posts" />
           <Route path="products" element={<Products />} />
-          <Route path="orders" />
+          <Route path="orders" element={<Orders />} />
         </Route>
       </Routes>
     </Router>

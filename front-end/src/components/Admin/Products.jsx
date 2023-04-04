@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { FaPen, FaTrash } from "react-icons/fa";
 
 const Products = () => {
   const [data, setData] = useState(null);
@@ -83,7 +84,7 @@ const Products = () => {
             <th className="border border-black">Name</th>
             <th className="border border-black">Price</th>
             <th className="border border-black">Sizes</th>
-            <th className="border border-black">Options</th>
+            <th className="border border-black">Action</th>
           </tr>
           {data &&
             data.map((item, index) => (
@@ -97,18 +98,12 @@ const Products = () => {
                   {item.sizes.join("/")}
                 </td>
                 <td className="border border-black py-1">
-                  <div className="flex gap-2 justify-center">
-                    <button
-                      className="bg-blue-300 px-4 rounded-md"
-                      onClick={() => setSelected(item)}
-                    >
-                      Edit
+                  <div className="flex gap-4 justify-center">
+                    <button onClick={() => setSelected(item)}>
+                      <FaPen />
                     </button>
-                    <button
-                      className="bg-red-300 px-4 rounded-md"
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete
+                    <button onClick={() => handleDelete(item._id)}>
+                      <FaTrash />
                     </button>
                   </div>
                 </td>

@@ -3,6 +3,7 @@ import { useCartContext } from "../context/CartContext";
 import CartItem from "../components/Cart/CartItem";
 import ButtonStretch from "../components/Buttons/ButtonStretch";
 import OrderSummary from "../components/Cart/OrderSummary";
+import CoverButton from "../components/Buttons/CoverButton";
 
 const Cart = () => {
   // Version 1.0
@@ -38,6 +39,20 @@ const Cart = () => {
   const { cart, total_price, total_item } = useCartContext();
 
   console.log(cart);
+
+  if (total_item === 0)
+    return (
+      <div className="px-80 py-16 gap-16 w-3/4">
+        <h1 className="text-4xl font-bold">YOUR BAG IS EMPTY</h1>
+        <p className="py-2">
+          Once you add something to your bag, it will appear here. Ready to get
+          started?
+        </p>
+        <Link to="/" className="invert relative">
+          <CoverButton text="GET STARTED" />
+        </Link>
+      </div>
+    );
 
   return (
     <div className="px-80 py-16 justify-center flex gap-16">

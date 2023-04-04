@@ -7,6 +7,10 @@ const SearchResult = () => {
   const found = products.length;
   const [sort, setSort] = useState("0");
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("query");
+
   useEffect(() => {
     axios
       .get("/api/v1/products/?name=" + query)
@@ -16,7 +20,7 @@ const SearchResult = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [query]);
   function getImageURL(id) {
     return "src/assets/img/" + id + ".webp";
   }
@@ -36,10 +40,6 @@ const SearchResult = () => {
         return a.price - b.price;
     }
   });
-
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const query = searchParams.get("query");
 
   console.log(sortedData);
 
